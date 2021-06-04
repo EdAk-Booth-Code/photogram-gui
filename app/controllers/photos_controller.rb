@@ -25,4 +25,21 @@ class PhotosController < ApplicationController
     redirect_to("/photos")
   end
 
+  def create
+    photo_path = params.fetch("input_image")
+    photo_caption = params.fetch("input_caption")
+    photo_owner_id = params.fetch("input_owner_id")
+
+    new_photo = Photo.new
+
+    new_photo.image = photo_path
+    new_photo.caption = photo_caption
+    new_photo.owner_id = photo_owner_id
+
+    new_photo.save
+    
+    redirect_to("/photos/"+ new_photo.id.to_s )
+    # render(:template => "photo_templates/create.html.erb")
+  end
+
 end
